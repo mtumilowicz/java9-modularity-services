@@ -1,0 +1,7 @@
+rootProject.name = 'java9-modularity-services'
+include 'bot'
+include 'botFactory'
+include 'client'
+include 'frenchman'
+include 'spaniard'
+

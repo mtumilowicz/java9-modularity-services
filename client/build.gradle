@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'java9-modularity-services'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.9
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile project(':bot')
+    compile project(':botFactory')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
