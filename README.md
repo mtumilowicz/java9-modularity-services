@@ -14,9 +14,8 @@ has special privileges to reach into the provider module to instantiate
 the nonexported implementation class on behalf of the consumer. This 
 means consumers of the service can use instances of this implementation 
 class, without having access to it directly. Also, a service consumer 
-doesn’t know which module provided an implementation, nor does it need 
-to. Because the only shared type between provider and consumer is the 
-service type (most often an interface).
-
+doesn’t know which module provided an implementation, because the only 
+shared type between provider and consumer is the service type (most 
+often an interface).
 
 ## project content

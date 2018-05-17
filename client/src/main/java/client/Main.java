@@ -1,7 +1,7 @@
 package client;
 
-import factory.BotFactory;
-import factory.LanguageNotSupportedException;
+import bot.factory.BotFactory;
+import bot.factory.LanguageNotSupportedException;
 
 import java.util.Objects;
 import java.util.Scanner;

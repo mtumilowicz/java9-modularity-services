@@ -3,7 +3,9 @@
  */
 module services.bot {
     exports bot;
-    exports factory;
-    
+    exports bot.factory;
+
     uses bot.Bot;
+    
+    provides bot.Bot with bot.Englishman;
 }

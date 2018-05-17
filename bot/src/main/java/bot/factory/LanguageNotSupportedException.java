@@ -1,4 +1,4 @@
-package factory;
+package bot.factory;
 
 /**
  * Created by mtumilowicz on 2018-05-14.

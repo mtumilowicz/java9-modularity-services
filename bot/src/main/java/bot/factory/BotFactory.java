@@ -1,4 +1,4 @@
-package factory;
+package bot.factory;
 
 import bot.Bot;
 import bot.Englishman;
