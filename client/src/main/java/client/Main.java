@@ -2,9 +2,7 @@ package client;
 
 import factory.BotFactory;
 import factory.LanguageNotSupportedException;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -15,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         String name;
         System.out.println("Bot languages: ");
-        Arrays.stream(BotFactory.getSupportedLanguages())
-                .forEach(x -> System.out.println("-- " + StringUtils.lowerCase(x.name())));
+        BotFactory.supportedLanguages()
+                .forEach(System.out::println);
         do {
             System.out.println("Type language: ");
 

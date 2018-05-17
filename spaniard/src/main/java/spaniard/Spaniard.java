@@ -1,7 +1,6 @@
 package spaniard;
 
 import bot.Bot;
-import bot.BotType;
 
 /**
  * Created by mtumilowicz on 2018-05-14.
@@ -16,8 +15,8 @@ public class Spaniard implements Bot {
     }
 
     @Override
-    public BotType type() {
-        return BotType.SPANISH;
+    public String language() {
+        return "spanish";
     }
 
     public static class Factory {

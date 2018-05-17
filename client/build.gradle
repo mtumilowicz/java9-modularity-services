@@ -12,8 +12,6 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
-    compile project(':bot')
-    compile project(':botFactory')
+    implementation project(':bot')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

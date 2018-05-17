@@ -12,6 +12,6 @@ repositories {
 }
 
 dependencies {
-    compile project(':bot')
+    implementation project(':bot')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
