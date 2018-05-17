@@ -11,7 +11,7 @@ public class Spaniard implements Bot {
 
     @Override
     public void greeting() {
-        System.out.println("Buenos días!");
+        System.out.println("Buenos días.");
     }
 
     @Override
