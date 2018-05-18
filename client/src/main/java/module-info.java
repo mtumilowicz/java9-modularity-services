@@ -3,5 +3,4 @@
  */
 module services.client {
     requires services.bot;
-
 }

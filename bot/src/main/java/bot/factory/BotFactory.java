@@ -2,6 +2,7 @@ package bot.factory;
 
 import bot.Bot;
 import bot.Englishman;
+import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,43 +13,33 @@ import java.util.stream.Collectors;
  * Created by mtumilowicz on 2018-05-14.
  */
 public class BotFactory {
-    public static final Bot get(String name) {
-        return getAll()
+    public static final Bot get(String language) {
+        return getAllBots()
                 .stream()
-                .filter(x -> Objects.equals(x.language(), name))
+                .filter(x -> Objects.equals(x.language(), language))
                 .findAny()
-                .orElseThrow(() -> new LanguageNotSupportedException(name + " is not supported yet."));
+                .orElseThrow(() -> new LanguageNotSupportedException(language + " is not supported yet."));
     }
     
-    public static final Bot getOrDefault(String name) {
-        return getAll()
+    public static final Bot getOrDefault(String language) {
+        return getAllBots()
                 .stream()
-                .filter(x -> Objects.equals(x.language(), name))
+                .filter(x -> Objects.equals(x.language(), language))
                 .findAny()
                 .orElse(new Englishman());
     }
 
     public static final List<String> supportedLanguages() {
-        return getAll().stream()
+        return getAllBots().stream()
                 .map(Bot::language)
                 .collect(Collectors.toList());
     }
 
-    private static List<Bot> getAll() {
-        return getBots().stream()
-                .map(ServiceLoader.Provider::get)
-                .collect(Collectors.toList());
+    private static List<Bot> getAllBots() {
+        return ImmutableList.copyOf(ServiceLoader.load(Bot.class));
     }
-
-    private static ServiceLoader<Bot> getBots() {
-        return ServiceLoader.load(Bot.class);
-    }
-
-    /**
-     * The following example loads the first available service provider. 
-     * If no service providers are located then it uses a default implementation.
-     */
-    static Bot getAny() {
+    
+    public static Bot getAny() {
         return ServiceLoader.load(Bot.class).findFirst().orElse(new Englishman());
     }
 }
