@@ -20,12 +20,12 @@ on behalf of the consumer).
 class without having access to it directly.  
 * The only shared type between provider and consumer is the service type 
 (most often an interface).
-* **provides** X **with** Y - Y is implementation of X, and is exposed 
-externally as a service type.
+* **provides** X **with** Y - `Y` is implementation of `X`, and is 
+exposed externally as a service type.
 * uses - consuming a service in the `Java 9` module system is quite 
 straightforward: we add a `uses` clause to `module-info.java` and we get 
 all available service instances by `ServiceLoader.load(X.class)`, where 
-X is a service interface.
+`X` is a service interface.
 * Service implementation could be provided by a module that we don’t 
 have on the module path at compile-time (providers and consumers are 
 bound only at run-time).
@@ -34,6 +34,8 @@ bound only at run-time).
 ### bot
 ```
 module services.bot {
+    requires com.google.common;
+
     exports bot;
     exports bot.factory;
 
@@ -42,7 +44,7 @@ module services.bot {
     provides bot.Bot with bot.Englishman;
 }
 ```
-All below examples are from `BotFactory`
+All below examples are from `BotFactory`.  
 Example of obtaining all available services instances of `Bot` 
 interface:
 ```
@@ -50,7 +52,7 @@ return ImmutableList.copyOf(ServiceLoader.load(Bot.class));
 ```
 Instances are created for all the provider types that have been 
 discovered for the requested `Bot` interface.  
-Note that `ServiceLoader`:
+`ServiceLoader` declaration:
 ```
 public static <S> ServiceLoader<S> load(Class<S> service)
 ```
@@ -91,7 +93,7 @@ public static final Bot getOrDefault(String name) {
             .orElse(new Englishman());
 }
 ```
-The following example loads the first available service provider. 
+The following example loads the first available service provider.  
 If no service providers are located then it uses a default 
 implementation:
 ```
@@ -113,8 +115,25 @@ ___
 Service instances can be created in **three** ways.  
 Implementation class must have either:  
 •	a public no-arg constructor  
-•	static provider method (example in out project: Spaniard)  
-•	factory with static provider method (remember to declare in 
-`module-info.java` that factory instead of the service implementation 
-class – just like we do with `Frenchman`)  
+•	static provider method  
+•	factory with static provider method
+### frenchman
+`Frenchman` class has private constructor and public static `provide()` 
+method.
+```
+module services.frenchman {
+    requires services.bot;
+    
+    provides bot.Bot with frenchman.Frenchman;
+}
+```
+### spaniard
+`Spaniard` class has private constructor and we have public factory 
+class with `public static provide()` method.
+```
+module services.spaniard {
+    requires services.bot;
 
+    provides bot.Bot with spaniard.Spaniard.Factory;
+}
+```
