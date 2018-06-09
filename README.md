@@ -45,60 +45,60 @@ module services.bot {
 }
 ```
 All below examples are from `BotFactory`.  
-Example of obtaining all available services instances of `Bot` 
+* Example of obtaining all available services instances of `Bot` 
 interface:
-```
-return ImmutableList.copyOf(ServiceLoader.load(Bot.class));
-```
-Instances are created for all the provider types that have been 
+    ```
+    return ImmutableList.copyOf(ServiceLoader.load(Bot.class));
+    ```
+* Instances are created for all the provider types that have been 
 discovered for the requested `Bot` interface.  
-`ServiceLoader` declaration:
-```
-public static <S> ServiceLoader<S> load(Class<S> service)
-```
-so simple calling:
-```
-ServiceLoader.load(Bot.class)
-```
-is not creating instances. You should do:
-```
-ServiceLoader.load(Bot.class).stream().map(ServiceLoader.Provider::get)
-```
-From java-doc:
-```
-Returns an instance of the provider.
+    `ServiceLoader` declaration:
+    ```
+    public static <S> ServiceLoader<S> load(Class<S> service)
+    ```
+    so simple calling:
+    ```
+    ServiceLoader.load(Bot.class)
+    ```
+    is not creating instances. You should do:
+    ```
+    ServiceLoader.load(Bot.class).stream().map(ServiceLoader.Provider::get)
+    ```
+* From java-doc:
+    ```
+    Returns an instance of the provider.
 
-@throws ServiceConfigurationError
-If the service provider cannot be instantiated, or in the case of a 
-provider factory, the public static provider() method returns null or 
-throws an error or exception.
-```
-Example of filtering all services to find `Bot` with `language`:
-```
-public static final Bot get(String language) {
-    return getAllBots()
+    @throws ServiceConfigurationError
+    If the service provider cannot be instantiated, or in the case of a 
+    provider factory, the public static provider() method returns null or 
+    throws an error or exception.
+    ```
+* Example of filtering all services to find `Bot` with `language`:
+    ```
+    public static final Bot get(String language) {
+        return getAllBots()
             .stream()
             .filter(x -> Objects.equals(x.language(), language))
             .findAny()
             .orElseThrow(() -> new LanguageNotSupportedException(language + " is not supported yet."));
-}
-```
-Example of providing default implementation if no service is available:
-```
-public static final Bot getOrDefault(String name) {
-    return getAllBots()
+    }
+    ```
+* Example of providing default implementation if no service is available:
+    ```
+    public static final Bot getOrDefault(String name) {
+        return getAllBots()
             .stream()
             .filter(x -> Objects.equals(x.language(), name))
             .findAny()
             .orElse(new Englishman());
-}
-```
-The following example loads the first available service provider.  
-If no service providers are located then it uses a default 
-implementation:
-```
-return ServiceLoader.load(Bot.class).findFirst().orElse(new Englishman());
-```
+    }
+    ```
+* The following example loads the first available service provider.  
+    If no service providers are located then it uses a default 
+    implementation:
+    ```
+    return ServiceLoader.load(Bot.class).findFirst().orElse(new Englishman());
+    ```
 
 ### client
 Mocks GUI: displays all languages to choose and then load the `Bot` that 
