@@ -111,8 +111,8 @@ module services.client {
 As you see - we only need `requires` on a base module with interface 
 `Bot`.
 
-___
-Service instances can be created in **three** ways.  
+# services
+* Service instances can be created in **three** ways.  
 Implementation class must have either:  
     • a public no-arg constructor  
     • static provider method  
