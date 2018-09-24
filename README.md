@@ -114,9 +114,9 @@ As you see - we only need `requires` on a base module with interface
 ___
 Service instances can be created in **three** ways.  
 Implementation class must have either:  
-•	a public no-arg constructor  
-•	static provider method  
-•	factory with static provider method
+    • a public no-arg constructor  
+    • static provider method  
+    • factory with static provider method
 ### frenchman
 `Frenchman` class has private constructor and public static `provide()` 
 method.
